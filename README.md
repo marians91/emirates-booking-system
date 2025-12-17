@@ -1,7 +1,7 @@
 # emirates-booking-system
 This repository containes my project-work for the 2025 accademic thesis at the Pegaso university, that ends a 3 years journey. A jouney that I went thorought with passion, commitment and hard work.
 
-Please find the project structure below:\n
+Please find the project structure below : 
 /emirates-booking-system/ ---> root folder
       /database-dump --> contains the dump of the database.
       /sql-scripts --> create, insert and select statements.
