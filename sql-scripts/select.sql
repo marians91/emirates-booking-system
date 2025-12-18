@@ -94,3 +94,22 @@ FROM pagamento pg
 WHERE YEAR(pg.data_pagamento) = 2025
 GROUP BY YEAR(pg.data_pagamento);
 
+-- TEST 5: Cliente con prenotazione non saldata 
+SELECT 
+    pr.codice_pnr,
+    pr.data_prenotazione,
+    pr.prezzo AS 'Importo Prenotazione',
+    COUNT(b.id_biglietto) AS 'Num Biglietti',
+    COALESCE(SUM(pg.importo), 0) AS 'Totale Pagato',
+    CASE 
+        WHEN COALESCE(SUM(pg.importo), 0) >= pr.prezzo THEN 'Saldato'
+        ELSE 'Parziale'
+    END AS 'Stato'
+FROM prenotazione pr
+LEFT JOIN biglietto b ON pr.id_prenotazione = b.id_prenotazione
+LEFT JOIN pagamento pg ON pr.id_prenotazione = pg.id_prenotazione
+WHERE pr.id_passeggero = 7
+GROUP BY pr.id_prenotazione;
+
+
+
